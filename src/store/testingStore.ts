@@ -1,9 +1,9 @@
-import { Greeter } from '../greeter'
+import { Greeter } from '../greeter';
 
 export class TestingStore {
-  constructor(private myName: string) { }
+  constructor(private myName: string) {}
 
-  greet () {
-    return Greeter(this.myName)
+  greet() {
+    return Greeter(this.myName);
   }
 }
