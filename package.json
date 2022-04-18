@@ -52,5 +52,10 @@
     "roots": [
       "<rootDir>/src"
     ]
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.181",
+    "firebase": "^9.6.11",
+    "lodash": "^4.17.21"
   }
 }
