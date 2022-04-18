@@ -1,6 +1,6 @@
 {
   "name": "rpg-vue-base",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A library to support my vue projects for D&D Webapps using pinia and google firebase",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
