@@ -4,18 +4,20 @@
   "description": "A library to support my vue projects for D&D Webapps using pinia and google firebase",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./lib/index.js\"",
-    "test": "jest --config jestconfig.json",
+    "build": "babel src --out-dir lib --extensions .ts",
+    "watch": "babel --watch src --out-dir lib --extensions .ts",
+    "test": "jest --config --watch",
+    "test:watch": "jest --config --watch",
+    "test:coverage": "jest --config --watch --coverage",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
     "preversion": "npm run lint",
     "prepublishOnly": "npm test && npm run lint",
     "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,10 @@
   },
   "homepage": "https://github.com/hexagon06/rpg-vue-base#readme",
   "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.1",
     "jest": "^27.5.1",
     "prettier": "^2.6.2",
@@ -40,5 +46,11 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "jest": {
+    "preset": "ts-jest/presets/js-with-babel-esm",
+    "roots": [
+      "<rootDir>/src"
+    ]
+  }
 }

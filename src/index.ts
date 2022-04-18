@@ -1,6 +1,6 @@
 export type Test = {
-  gotNothing: true;
-};
+  gotNothing: true
+}
 
-export { Greeter } from './greeter.js';
-export * from './store/index.js';
+export { Greeter } from './greeter'
+export * from './store/index'

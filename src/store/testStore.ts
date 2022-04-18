@@ -1,6 +1,6 @@
 import { Greeter } from '../greeter'
 
-export class TestingStore {
+export class TestStore {
   constructor(private myName: string) { }
 
   greet () {
