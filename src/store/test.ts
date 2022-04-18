@@ -4,7 +4,7 @@ export class TestStore {
   constructor(private myName: string) { }
 
   greet () {
-    console.log(Greeter(this.myName))
+    return (Greeter(this.myName))
 
   }
 }

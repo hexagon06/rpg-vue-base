@@ -6,7 +6,7 @@ export class TestingStore {
   }
 
   greet () {
-    console.log(Greeter(this.myName))
+    return Greeter(this.myName)
 
   }
 }
