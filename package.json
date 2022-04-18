@@ -7,14 +7,14 @@
   "scripts": {
     "build": "babel src --out-dir lib --extensions .ts",
     "watch": "babel --watch src --out-dir lib --extensions .ts",
-    "test": "jest --config --watch",
+    "test": "jest --config",
     "test:watch": "jest --config --watch",
     "test:coverage": "jest --config --watch --coverage",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "preversion": "npm run lint",
-    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "tsc && npm run build && npm test & npm run lint",
+    "prepublishOnly": "tsc && npm run build && npm test & npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
     "tsc": "tsc"
