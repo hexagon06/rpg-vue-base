@@ -4,6 +4,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
     "outDir": "./lib",
     "strict": true
   },
