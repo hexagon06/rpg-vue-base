@@ -2,10 +2,10 @@ export type Filter<T> = {
   apply (collection: T[]): T[]
 }
 
-export class FilterResult {
-  count: number = 0
-  pageSize: number = 20
-  currentPage: number = 0
+export type FilterResult = {
+  count: number,
+  pageSize: number,
+  currentPage: number,
 }
 
 export function defaultResult (): FilterResult {

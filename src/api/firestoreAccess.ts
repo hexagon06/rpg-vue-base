@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore'
 import { cloneDeep } from 'lodash'
 import { getCollection } from './firestoreUtils'
+import { ErrorLogger } from './utils'
 
 export class FirestoreAcces<T extends IdItem> {
   // https://firebase.google.com/docs/firestore/manage-data/add-data
@@ -18,28 +19,29 @@ export class FirestoreAcces<T extends IdItem> {
 
   constructor(
     private readonly db: Firestore,
-    private readonly collection: string) {
+    private readonly entityCollection: string,
+    private readonly errorLogger: ErrorLogger) {
   }
 
   ref () {
-    return collection(this.db, this.collection)
+    return collection(this.db, this.entityCollection)
   }
 
   async get (): Promise<T[]> {
     try {
-      const result = await getCollection(this.db, this.collection)
+      const result = await getCollection(this.db, this.entityCollection)
       return result.docs.map<T>((value) => {
         return { ...(value.data() as T), id: value.id }
       })
     } catch (error) {
-      console.error(`Error fetching collection "${this.collection}": `, error)
+      this.errorLogger(`Error fetching collection "${this.entityCollection}": `, error)
       return []
     }
   }
 
   async getById (id: string): Promise<T | undefined> {
     try {
-      const docRef = doc(this.db, this.collection, id)
+      const docRef = doc(this.db, this.entityCollection, id)
       const result = await getDoc(docRef)
       if (result.exists()) {
         return { ...(result.data() as T), id: result.id }
@@ -47,7 +49,7 @@ export class FirestoreAcces<T extends IdItem> {
         return undefined
       }
     } catch (error) {
-      console.error(`Error fetching document from "${this.collection}": `, error)
+      this.errorLogger(`Error fetching document from "${this.entityCollection}": `, error)
       return undefined
     }
   }
@@ -56,10 +58,10 @@ export class FirestoreAcces<T extends IdItem> {
     // https://firebase.google.com/docs/firestore/manage-data/add-data#add_a_document
     try {
       delete item.id
-      const reference = await addDoc(collection(this.db, this.collection), item)
+      const reference = await addDoc(collection(this.db, this.entityCollection), item)
       return reference.id
     } catch (error) {
-      console.error(`Error adding document to collection"${this.collection}": `, error)
+      this.errorLogger(`Error adding document to collection"${this.entityCollection}": `, error)
       throw error
     }
   }
@@ -67,9 +69,9 @@ export class FirestoreAcces<T extends IdItem> {
   async addAt (item: T, path: string): Promise<void> {
     try {
       delete item.id
-      await setDoc(doc(this.db, this.collection, path), item)
+      await setDoc(doc(this.db, this.entityCollection, path), item)
     } catch (error) {
-      console.error(`Error adding document to collection "${this.collection}" at ${path}: `, error)
+      this.errorLogger(`Error adding document to collection "${this.entityCollection}" at ${path}: `, error)
       throw error
     }
   }
@@ -81,9 +83,9 @@ export class FirestoreAcces<T extends IdItem> {
     const entity = cloneDeep(item) as any
     delete entity.id
     try {
-      await updateDoc(doc(this.db, this.collection, id), entity)
+      await updateDoc(doc(this.db, this.entityCollection, id), entity)
     } catch (error) {
-      console.error(`Error updating document in "${this.collection}": `, error)
+      this.errorLogger(`Error updating document in "${this.entityCollection}": `, error)
       throw error
     }
   }
@@ -92,9 +94,9 @@ export class FirestoreAcces<T extends IdItem> {
     const { id } = item
     if (id === undefined) throw new Error('item.id is undefined, is this item stored?')
     try {
-      await deleteDoc(doc(this.db, this.collection, id))
+      await deleteDoc(doc(this.db, this.entityCollection, id))
     } catch (error) {
-      console.error(`Error deleting document in "${this.collection}": `, error)
+      this.errorLogger(`Error deleting document in "${this.entityCollection}": `, error)
       throw error
     }
   }

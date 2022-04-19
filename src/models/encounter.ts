@@ -12,7 +12,7 @@ export type EncounterIndex = Reference & EncounterBase
 
 export function getEncounterIndex (id: string, encounter: Encounter): EncounterIndex {
   return {
-    id: id,
+    id,
     name: encounter.name,
     synopsis: encounter.synopsis,
     tags: encounter.tags,
