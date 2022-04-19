@@ -1,7 +1,7 @@
-import { IdItem } from '.'
+import { IdItem } from '.';
 
 export type Tag = IdItem & {
-  label: string
-  color?: string
-  icon?: string
-}
+  label: string;
+  color?: string;
+  icon?: string;
+};

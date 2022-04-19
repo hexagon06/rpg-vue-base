@@ -1,2 +1,1 @@
-
-export type ErrorLogger = (message: string, error: any) => void
+export type ErrorLogger = (message: string, error: any) => void;
