@@ -1,16 +1,16 @@
-import { CreatureIndex, DatedItem, IdItem, Reference, ReferenceCount } from '.'
-import { Tag } from './tags'
+import { CreatureIndex, DatedItem, IdItem, Reference, ReferenceCount } from '.';
+import { Tag } from './tags';
 
 export type EncounterBase = {
-  name: string
-  synopsis: string
-  tags: Tag[]
-  group?: string
-}
+  name: string;
+  synopsis: string;
+  tags: Tag[];
+  group?: string;
+};
 
-export type EncounterIndex = Reference & DatedItem & EncounterBase
+export type EncounterIndex = Reference & DatedItem & EncounterBase;
 
-export function getEncounterIndex (id: string, encounter: Encounter): EncounterIndex {
+export function getEncounterIndex(id: string, encounter: Encounter): EncounterIndex {
   return {
     id,
     name: encounter.name,
@@ -18,25 +18,27 @@ export function getEncounterIndex (id: string, encounter: Encounter): EncounterI
     tags: encounter.tags,
     created: encounter.created,
     lastEdited: encounter.lastEdited,
-  }
+  };
 }
 
-export type Encounter = IdItem & DatedItem &
+export type Encounter = IdItem &
+  DatedItem &
   EncounterBase & {
-    flavorText: string
-    description: string
-    reward?: string
-    locations: Reference[]
-    creatures: ReferenceCount[]
-    environment: string[]
-  }
+    flavorText: string;
+    description: string;
+    reward?: string;
+    locations: Reference[];
+    creatures: ReferenceCount[];
+    environment: string[];
+  };
 
-export type FilledEncounter = IdItem & DatedItem &
+export type FilledEncounter = IdItem &
+  DatedItem &
   EncounterBase & {
-    flavorText: string
-    description: string
-    reward?: string
-    locations: Reference[]
-    creatures: (CreatureIndex & { count: number })[]
-    environment: string[]
-  }
+    flavorText: string;
+    description: string;
+    reward?: string;
+    locations: Reference[];
+    creatures: (CreatureIndex & { count: number })[];
+    environment: string[];
+  };
