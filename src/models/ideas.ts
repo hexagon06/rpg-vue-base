@@ -1,16 +1,16 @@
-import { IdItem, Reference, Tag } from '.';
+import { DatedItem, IdItem, Reference, Tag } from '.'
 
 export type IdeaBase = {
-  title: string;
-  synopsis: string;
-  tags: string[];
-  userId: string;
-  category?: string;
-};
+  title: string
+  synopsis: string
+  tags: string[]
+  userId: string
+  category?: string
+}
 
-export type IdeaIndex = Reference & IdeaBase;
+export type IdeaIndex = Reference & DatedItem & IdeaBase
 
-export function getIdeaIndex(id: string, idea: Idea): IdeaIndex {
+export function getIdeaIndex (id: string, idea: Idea): IdeaIndex {
   return {
     id,
     title: idea.title,
@@ -18,15 +18,17 @@ export function getIdeaIndex(id: string, idea: Idea): IdeaIndex {
     tags: idea.tags,
     userId: idea.userId,
     category: idea.category,
-  };
+    created: idea.created,
+    lastEdited: idea.lastEdited,
+  }
 }
 
-export type Idea = IdItem &
+export type Idea = IdItem & DatedItem &
   IdeaBase & {
-    text: string;
-  };
+    text: string
+  }
 
-export type FilledIdea = IdItem &
+export type FilledIdea = IdItem & DatedItem &
   IdeaBase & {
-    text: string;
-  };
+    text: string
+  }
