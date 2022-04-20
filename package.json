@@ -30,6 +30,10 @@
     "url": "https://github.com/hexagon06/rpg-vue-base/issues"
   },
   "homepage": "https://github.com/hexagon06/rpg-vue-base#readme",
+  "dependencies": {
+    "@types/lodash": "^4.14.181",
+    "lodash": "^4.17.21"
+  },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
@@ -52,10 +56,5 @@
     "roots": [
       "<rootDir>/src"
     ]
-  },
-  "dependencies": {
-    "@types/lodash": "^4.14.181",
-    "firebase": "^9.6.11",
-    "lodash": "^4.17.21"
   }
 }
